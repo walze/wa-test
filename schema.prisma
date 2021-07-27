@@ -1,0 +1,29 @@
+datasource db {
+  url      = env("DB_URL")
+  provider = "mysql"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Lab {
+  id     Int     @id @default(autoincrement())
+  name   String  @unique
+  status Boolean @default(true)
+  examId Int?
+  Exam   Exam?   @relation(fields: [examId], references: [id])
+}
+
+model Exam {
+  id           Int      @id @default(autoincrement())
+  status       Boolean
+  Lab          Lab[]
+  type         ExamType @relation(fields: [examType], references: [name])
+  examType String
+}
+
+model ExamType {
+  name String @id
+  Exam Exam[]
+}

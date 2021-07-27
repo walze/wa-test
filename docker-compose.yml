@@ -1,0 +1,28 @@
+services:
+  db:
+    image: mysql:5.7
+    volumes:
+      - db_data:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "${MYSQL_ROOT_PASSWORD}"
+      MYSQL_DATABASE: "${MYSQL_DATABASE}"
+      MYSQL_USER: "${MYSQL_USER}"
+      MYSQL_PASSWORD: "${MYSQL_PASSWORD}"
+
+  api:
+    container_name: api
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - './:/app'
+    ports:
+      - '3000:3000' # expose ports - HOST:CONTAINER
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - db
+
+volumes:
+  db_data: {}
