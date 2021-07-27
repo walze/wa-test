@@ -1,11 +1,12 @@
 import express from 'express';
+import { lab } from './route/lab';
 
 const app = express();
 const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send('Hello World!');
-});
+app.use('/lab', lab);
+
+app.get('/', (_, res) => res.send('👍'));
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);

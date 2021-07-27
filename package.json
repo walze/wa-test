@@ -8,15 +8,18 @@
     "eslint-config-xo": "^0.37.0",
     "prisma": "^2.28.0",
     "ts-node": "^10.1.0",
+    "ts-node-dev": "^1.1.8",
     "tslib": "^2.3.0",
     "typescript": "^4.3.5"
   },
   "name": "teste-wa",
   "version": "1.0.0",
   "description": "Test for WA",
-  "main": "index.js",
+  "main": "src/main.ts",
   "scripts": {
     "start": "ts-node src/main.ts",
+    "dev": "tsnd --respawn src/main.ts",
+    "ts-node": "ts-node --compiler-options \"{\\\"module\\\":\\\"commonjs\\\"}\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
