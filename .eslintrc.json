@@ -1,0 +1,27 @@
+{
+  "env": {
+    "es2021": true,
+    "node": true
+  },
+  "extends": [
+    "eslint:recommended",
+    "xo"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": [
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "no-undef": "off",
+    "no-unused-vars": "off",
+    "indent": ["error", 2],
+    "curly": ["error", "multi"],
+    "object-curly-spacing": ["error", "always"]
+    // "@typescript-eslintno-undef": "error",
+    // "@typescript-eslintno-unused-vars": "error"
+  }
+}
