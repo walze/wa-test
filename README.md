@@ -1,7 +1,9 @@
 
 # TESTE WA
 
-  Todo o projeto pode ser rodado via Docker, usando `docker-compose up`. A API foi documentada usando o Postman, o JSON dele foi exportado para [este link](https://www.postman.com/collections/0b69a4e6c6b62e8437f1). O projeto foi hospedado usando Heroku, [neste link](https://teste-wa.herokuapp.com/) 
+  Todo o projeto pode ser rodado via Docker, usando `docker-compose up` ou com `npm start` se ja tiver um banco rodando. Caso, já tenha, é necessario uma variaveis de ambiente chamada `DATABASE_URL` com a url de login do banco `postgresql://root:pwd@host:3306/database`. 
+  
+  A API foi documentada usando o Postman, o JSON dele foi exportado para [este link](https://www.postman.com/collections/0b69a4e6c6b62e8437f1). O projeto foi hospedado usando Heroku, [neste link](https://teste-wa.herokuapp.com/) 
   
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/1480184-671f4fb1-a9cc-4f6a-8567-4fef49e17a25?action=collection%2Ffork&collection-url=entityId%3D1480184-671f4fb1-a9cc-4f6a-8567-4fef49e17a25%26entityType%3Dcollection%26workspaceId%3Ddd9ff0a8-b7a9-49f8-80b9-f0b223d6c5cf)
 
