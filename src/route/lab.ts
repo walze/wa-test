@@ -2,6 +2,7 @@
 import express from 'express';
 import { Prisma, PrismaClient } from '@prisma/client';
 import { MaybeArray } from '../types';
+import { errorHandler } from '../helpers';
 
 const prisma = new PrismaClient();
 
@@ -9,47 +10,45 @@ export const lab = express.Router();
 
 // Get active
 lab.get('/', async (_, res) => {
-  res.send(
-    await prisma.lab.findMany({ where: { status: true } }),
-  );
+  errorHandler(
+    prisma.lab.findMany({ where: { status: true } }),
+  )
+    .then(d => res.send(d));
 });
 
 // Save lab
-lab.post<{}, {}, MaybeArray<Prisma.LabCreateManyExamInput>>('/', async (_, res) => {
-  const { body } = _;
+lab.post<{}, {}, MaybeArray<Prisma.LabCreateManyExamInput>>('/', async ({ body }, res) => {
   const data = Array.isArray(body) ? body : [body];
 
-  res.send(
-    await prisma.lab.createMany({ data }),
-  );
+  errorHandler(prisma.lab.createMany({ data }))
+    .then(d => res.send(d));
 });
 
 // Update lab
-lab.put<{}, {}, MaybeArray<Prisma.LabCreateManyExamInput>>('/', async (_, res) => {
-  const { body } = _;
-  const data = Array.isArray(body) ? body : [body];
-
-  res.send(
-    await prisma.lab.updateMany({ data }),
-  );
+lab.put<{ id: string }, {}, Prisma.LabCreateManyExamInput>('/:id', async ({ body, params }, res) => {
+  errorHandler(
+    prisma.lab.updateMany({ where: { id: +params.id }, data: body }),
+  )
+    .then(d => res.send(d));
 });
 
 // Delete one or many
-lab.delete<{}, {}, MaybeArray<number>>('/', async (_, res) => {
-  const { body } = _;
+lab.delete<{}, {}, MaybeArray<number>>('/', async ({ body }, res) => {
   const data = Array.isArray(body) ? body : [body];
 
-  const deletes = await prisma.$transaction(
-    data.map(id => prisma.lab.delete({ where: { id } })),
-  );
-
-  res.send(deletes);
+  errorHandler(
+    prisma.$transaction(
+      data.map(id => prisma.lab.delete({ where: { id } })),
+    ),
+  )
+    .then(d => res.send(d));
 });
 
 // Delete by id
 lab.delete('/:id', async (req, res) => {
-  res.send(
-    await prisma.lab.delete({ where: { id: +req.params.id } }),
-  );
+  errorHandler(
+    prisma.lab.delete({ where: { id: +req.params.id } }),
+  )
+    .then(d => res.send(d));
 });
 
