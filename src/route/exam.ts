@@ -14,9 +14,23 @@ exam.get('/', async (_, res) => {
   );
 });
 
+// Find Exam
+type SearchQuery = { q: string };
+exam.get<{}, {}, {}, SearchQuery>('/find', async ({ query: { q } }, res) => {
+  res.send(
+    await prisma.exam.findMany({
+      where: {
+        name: { contains: q },
+      },
+      include: {
+        Lab: true,
+      },
+    }),
+  );
+});
+
 // Save exam
-exam.post<{}, {}, MaybeArray<Prisma.ExamCreateManyInput>>('/', async (_, res) => {
-  const { body } = _;
+exam.post<{}, {}, MaybeArray<Prisma.ExamCreateManyInput>>('/', async ({ body }, res) => {
   const data = Array.isArray(body) ? body : [body];
 
   res.send(
@@ -25,8 +39,7 @@ exam.post<{}, {}, MaybeArray<Prisma.ExamCreateManyInput>>('/', async (_, res) =>
 });
 
 // Update exam
-exam.put<{}, {}, MaybeArray<Prisma.LabCreateManyExamInput>>('/', async (_, res) => {
-  const { body } = _;
+exam.put<{}, {}, MaybeArray<Prisma.LabCreateManyExamInput>>('/', async ({ body }, res) => {
   const data = Array.isArray(body) ? body : [body];
 
   res.send(
@@ -35,8 +48,7 @@ exam.put<{}, {}, MaybeArray<Prisma.LabCreateManyExamInput>>('/', async (_, res) 
 });
 
 // Delete one or many
-exam.delete<{}, {}, MaybeArray<number>>('/', async (_, res) => {
-  const { body } = _;
+exam.delete<{}, {}, MaybeArray<number>>('/', async ({ body }, res) => {
   const data = Array.isArray(body) ? body : [body];
 
   const deletes = await prisma.$transaction(

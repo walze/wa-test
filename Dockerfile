@@ -1,9 +1,11 @@
 FROM node:16
 
+SHELL ["/bin/bash", "-c"]
+
 WORKDIR /app
 
 COPY . .
 
 RUN npm i
 
-CMD npm start
+ENTRYPOINT [ "./entrypoint.sh" ]
