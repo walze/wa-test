@@ -21,7 +21,8 @@
     "indent": ["error", 2],
     "curly": ["error", "multi"],
     "object-curly-spacing": ["error", "always"],
-    "new-cap":"off"
+    "new-cap":"off",
+    "no-implicit-coercion":"off"
     // "@typescript-eslintno-undef": "error",
     // "@typescript-eslintno-unused-vars": "error"
   }
