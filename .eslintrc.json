@@ -22,7 +22,8 @@
     "curly": ["error", "multi"],
     "object-curly-spacing": ["error", "always"],
     "new-cap":"off",
-    "no-implicit-coercion":"off"
+    "no-implicit-coercion":"off",
+    "dot-notation":"off"
     // "@typescript-eslintno-undef": "error",
     // "@typescript-eslintno-unused-vars": "error"
   }

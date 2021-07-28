@@ -5,7 +5,7 @@ import { exam } from './route/exam';
 import { lab } from './route/lab';
 
 const app = express();
-const port = process.env.PORT || 3000;
+const port = Number(process.env['PORT']) || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
